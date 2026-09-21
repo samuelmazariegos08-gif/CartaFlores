@@ -46,14 +46,8 @@ h1{font-size:23px;line-height:1.3;margin:0;color:#c66c24;font-weight:400;text-sh
 .controls button:hover{background:#fff9d5a8}
 .controls button:focus-visible{outline:2px solid #ac7926;outline-offset:2px}
 .separator{opacity:.5}.no-script{position:absolute;bottom:80px;padding:12px}
-.music-panel{width:min(360px,calc(100vw - 32px));text-align:center;background:#fffbea;border:1px solid #efd98c;border-radius:12px;padding:14px 12px;color:#81632c;box-shadow:0 8px 28px #b18d1612}
-.music-panel[hidden]{display:none}
-.song-title{font-size:21px;line-height:1.25;margin:0 0 12px}.song-title span{font-size:17px}
-.music-panel iframe{display:block;width:100%;height:200px;border:0;border-radius:5px;background:#201b13}
-.music-help{font-size:15px;margin:10px 0 2px}.music-panel a{font-size:14px;color:#86601e;text-underline-offset:3px}
-.scene.music-visible{grid-template-rows:480px auto;align-content:center;padding-bottom:110px}
-.scene.music-visible .stage{margin-top:0}
-.scene.music-visible .controls{bottom:20px}
+.controls .music-status{font-size:13px;margin:3px 16px 0}.music-status:empty{display:none}
+#music-toggle[aria-pressed="true"]{background:#fff9d5a8;color:#92620d}
 @media(min-height:650px){.stage{margin-top:-30px}.controls{bottom:35px}}
 @media(max-width:500px){.stage{transform:scale(.84)}.sunlight{background:linear-gradient(90deg,#fff9b730,#fff9b795 15%,#fff6a9c9 85%,#fff6a950)}}
 @media(max-width:410px){.stage{transform:scale(.73)}}

@@ -4,7 +4,7 @@ Recreación programada del sobre animado del video de referencia. HTML, CSS y Ja
 
 ## Ver la página
 
-Abre `index.html` en tu navegador. El sobre gira, se abre, muestra la carta y repite la secuencia. Puedes tocarlo o usar Enter/Espacio para abrirlo y cerrarlo manualmente. «Pausar» detiene la repetición automática al finalizar el movimiento actual; «Repetir» vuelve a mostrar la apertura. Se respeta la preferencia del sistema de reducir movimiento.
+Abre `index.html` en tu navegador. Toca el sobre o usa Enter/Espacio: gira, se abre y reproduce la canción desde el estribillo. Al cerrarlo manualmente se pausa la música. «Repetir» reinicia la apertura y el audio; «Animar» activa la repetición automática del sobre. Se respeta la preferencia del sistema de reducir movimiento.
 
 ## Publicar en GitHub Pages
 
@@ -38,16 +38,17 @@ script.js
 assets/
   girasol.svg
   ramo.svg
+  flores-amarillas.m4a
   IndieFlower-Regular.ttf
   OFL.txt
 ```
 
 ## Canción
 
-El botón «Escuchar canción» abre un reproductor de **Flores amarillas — Floricienta** desde YouTube. Pulsa reproducir dentro del video; sus controles permiten pausar y cambiar el volumen. «Cerrar música» detiene la canción y cierra el reproductor.
+**Flores amarillas — Floricienta** se reproduce mediante un elemento HTML `<audio>`, desde el archivo local `assets/flores-amarillas.m4a`, preparado a partir del audio proporcionado por el usuario. El archivo empieza en el estribillo solicitado. No hay reproductores incrustados ni solicitudes a YouTube.
 
-La música requiere conexión a Internet y disponibilidad del video en YouTube. Hay un enlace directo como alternativa si el navegador bloquea el reproductor. Para probar la integración, usa la página publicada en GitHub Pages o un servidor local HTTP; abrir `index.html` directamente como archivo puede impedir la reproducción por la política de referencias de YouTube. El sobre y la carta siguen funcionando sin conexión.
+El primer toque o clic sobre el sobre inicia el audio. La llamada a reproducción se hace directamente en esa interacción, sin esperar a que termine la animación. El botón «Pausar música» pausa la canción; «Música» la reanuda. Volver a abrir el sobre manualmente o pulsar «Repetir» reinicia el estribillo. El control de animación es independiente de la pausa de música.
 
-Video enlazado: https://www.youtube.com/watch?v=dOvQXBobwwM. La canción se reproduce desde YouTube; no se incluye un archivo de audio en el repositorio.
+Todos los recursos están incluidos y funcionan sin conexión si se abre la carpeta descargada. En GitHub Pages el navegador descarga el audio del propio sitio. Para cambiarlo, sustituye `assets/flores-amarillas.m4a`; si cambias de formato, actualiza también la ruta del elemento `audio` en `index.html`.
 
 Indie Flower se distribuye bajo la licencia SIL Open Font License incluida en `assets/OFL.txt`. No se necesita el video original para ejecutar la página.

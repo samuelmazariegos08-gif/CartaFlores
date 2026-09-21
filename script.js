@@ -4,7 +4,7 @@ const CONFIG = {
   remitente: 'Tu Amor',
   introduccion: 'Porque sé que te encantan y te\nmereces todo el mundo...',
   mensaje: '¡Flores Amarillas para el\nAmor de mi vida! 🌻',
-  automatico: true,
+  automatico: false,
   tiempoAbierta: 4300,
   tiempoCerrada: 1800,
 };
@@ -30,6 +30,7 @@ const wait = ms => new Promise(resolve => setTimeout(resolve, reducedMotion.matc
 
 function updateControls() {
   autoplayButton.setAttribute('aria-pressed', String(automatic));
+  autoplayButton.setAttribute('aria-label', automatic ? 'Pausar animación automática' : 'Activar animación automática');
   document.querySelector('#play-icon').textContent = automatic ? 'Ⅱ' : '▷';
   document.querySelector('#play-label').textContent = automatic ? 'Pausar' : 'Animar';
 }
@@ -75,10 +76,13 @@ async function animate(open) {
 }
 
 function toggleEnvelope() {
+  if (busy) return;
   automatic = false;
   clearTimeout(nextCycle);
   updateControls();
-  if (!busy) animate(!opened);
+  if (opened) song.pause();
+  else playMusic(true);
+  animate(!opened);
 }
 envelope.addEventListener('click', toggleEnvelope);
 envelope.addEventListener('keydown', event => {
@@ -89,6 +93,7 @@ envelope.addEventListener('keydown', event => {
 });
 autoplayButton.addEventListener('click', () => {
   automatic = !automatic;
+  if (automatic) playMusic();
   updateControls();
   schedule();
 });
@@ -97,6 +102,7 @@ document.querySelector('#replay').addEventListener('click', async () => {
   automatic = false;
   clearTimeout(nextCycle);
   updateControls();
+  playMusic(true);
   if (opened) await animate(false);
   await animate(true);
 });
@@ -111,28 +117,39 @@ reducedMotion.addEventListener('change', () => {
 updateControls();
 schedule();
 
-// YouTube se carga únicamente cuando la persona abre el reproductor.
-// Eliminar el iframe al cerrar detiene también cualquier reproducción.
+// Audio local: play() se llama directamente desde el clic para conservar
+// la activación del usuario, incluso mientras se anima la apertura.
+const song = document.querySelector('#song');
 const musicToggle = document.querySelector('#music-toggle');
-const musicPanel = document.querySelector('#music-panel');
-const musicContainer = document.querySelector('#music-player');
+const musicStatus = document.querySelector('#music-status');
+song.volume = 0.7;
+
+function updateMusic() {
+  const playing = !song.paused && !song.ended;
+  musicToggle.setAttribute('aria-pressed', String(playing));
+  musicToggle.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
+  document.querySelector('#music-label').textContent = playing ? 'Pausar música' : 'Música';
+}
+
+function playMusic(restart = false) {
+  musicStatus.textContent = '';
+  if (restart || song.ended) song.currentTime = 0;
+  song.play().catch(error => {
+    if (error.name === 'AbortError') return;
+    musicStatus.textContent = error.name === 'NotAllowedError'
+      ? 'Toca Música para escuchar la canción.'
+      : 'No se pudo cargar la música. Toca Música para reintentar.';
+    updateMusic();
+  });
+}
+
+song.addEventListener('play', updateMusic);
+song.addEventListener('pause', updateMusic);
+song.addEventListener('ended', updateMusic);
+song.addEventListener('playing', () => { musicStatus.textContent = ''; });
 musicToggle.addEventListener('click', () => {
-  const show = musicPanel.hidden;
-  musicPanel.hidden = !show;
-  document.querySelector('.scene').classList.toggle('music-visible', show);
-  musicToggle.setAttribute('aria-expanded', String(show));
-  document.querySelector('#music-label').textContent = show ? 'Cerrar música' : 'Escuchar canción';
-  if (show) {
-    const player = document.createElement('iframe');
-    player.src = 'https://www.youtube-nocookie.com/embed/dOvQXBobwwM?playsinline=1&rel=0';
-    player.title = 'Floricienta — Flores amarillas';
-    player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    player.allowFullscreen = true;
-    player.referrerPolicy = 'strict-origin-when-cross-origin';
-    musicContainer.replaceChildren(player);
-    musicPanel.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'nearest' });
-  } else {
-    musicContainer.replaceChildren();
-    musicToggle.focus({ preventScroll: true });
-  }
+  if (song.paused) {
+    if (song.error) song.load();
+    playMusic();
+  } else song.pause();
 });
