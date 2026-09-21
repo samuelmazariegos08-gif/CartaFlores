@@ -42,4 +42,12 @@ assets/
   OFL.txt
 ```
 
-Indie Flower se distribuye bajo la licencia SIL Open Font License incluida en `assets/OFL.txt`. No se necesita el video original para ejecutar la página. No incluye audio.
+## Canción
+
+El botón «Escuchar canción» abre un reproductor de **Flores amarillas — Floricienta** desde YouTube. Pulsa reproducir dentro del video; sus controles permiten pausar y cambiar el volumen. «Cerrar música» detiene la canción y cierra el reproductor.
+
+La música requiere conexión a Internet y disponibilidad del video en YouTube. Hay un enlace directo como alternativa si el navegador bloquea el reproductor. Para probar la integración, usa la página publicada en GitHub Pages o un servidor local HTTP; abrir `index.html` directamente como archivo puede impedir la reproducción por la política de referencias de YouTube. El sobre y la carta siguen funcionando sin conexión.
+
+Video enlazado: https://www.youtube.com/watch?v=dOvQXBobwwM. La canción se reproduce desde YouTube; no se incluye un archivo de audio en el repositorio.
+
+Indie Flower se distribuye bajo la licencia SIL Open Font License incluida en `assets/OFL.txt`. No se necesita el video original para ejecutar la página.

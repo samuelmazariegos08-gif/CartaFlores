@@ -42,12 +42,20 @@
         </div>
       </div>
     </div>
+    <section class="music-panel" id="music-panel" aria-label="Música para la carta" hidden>
+      <p class="song-title">Flores amarillas <span>— Floricienta</span></p>
+      <div id="music-player"></div>
+      <p class="music-help">Pulsa ▶ en el video para escucharla.</p>
+      <a href="https://www.youtube.com/watch?v=dOvQXBobwwM" target="_blank" rel="noopener noreferrer">Escuchar en YouTube ↗</a>
+    </section>
     <footer class="controls">
       <p id="hint" aria-live="polite">Toca el sobre para abrirlo</p>
       <div class="control-buttons">
         <button id="autoplay" type="button" aria-pressed="true"><span id="play-icon" aria-hidden="true">Ⅱ</span> <span id="play-label">Pausar</span></button>
         <span class="separator" aria-hidden="true">·</span>
         <button id="replay" type="button"><span aria-hidden="true">↻</span> Repetir</button>
+        <span class="separator" aria-hidden="true">·</span>
+        <button id="music-toggle" type="button" aria-expanded="false" aria-controls="music-panel"><span aria-hidden="true">♫</span> <span id="music-label">Escuchar canción</span></button>
       </div>
     </footer>
     <noscript><p class="no-script">Activa JavaScript para abrir el sobre y ver la animación.</p></noscript>

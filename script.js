@@ -110,3 +110,29 @@ reducedMotion.addEventListener('change', () => {
 });
 updateControls();
 schedule();
+
+// YouTube se carga únicamente cuando la persona abre el reproductor.
+// Eliminar el iframe al cerrar detiene también cualquier reproducción.
+const musicToggle = document.querySelector('#music-toggle');
+const musicPanel = document.querySelector('#music-panel');
+const musicContainer = document.querySelector('#music-player');
+musicToggle.addEventListener('click', () => {
+  const show = musicPanel.hidden;
+  musicPanel.hidden = !show;
+  document.querySelector('.scene').classList.toggle('music-visible', show);
+  musicToggle.setAttribute('aria-expanded', String(show));
+  document.querySelector('#music-label').textContent = show ? 'Cerrar música' : 'Escuchar canción';
+  if (show) {
+    const player = document.createElement('iframe');
+    player.src = 'https://www.youtube-nocookie.com/embed/dOvQXBobwwM?playsinline=1&rel=0';
+    player.title = 'Floricienta — Flores amarillas';
+    player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    player.allowFullscreen = true;
+    player.referrerPolicy = 'strict-origin-when-cross-origin';
+    musicContainer.replaceChildren(player);
+    musicPanel.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'nearest' });
+  } else {
+    musicContainer.replaceChildren();
+    musicToggle.focus({ preventScroll: true });
+  }
+});
