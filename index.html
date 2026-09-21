@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff5a2">
+  <meta name="description" content="Una carta y flores amarillas para el amor de mi vida.">
+  <title>Flores amarillas para ti 🌻</title>
+  <link rel="icon" href="./assets/girasol.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main class="scene" aria-label="Una carta de amor con flores amarillas">
+    <div class="sunlight" aria-hidden="true"></div>
+    <div class="stage">
+      <div class="envelope-shadow" aria-hidden="true"></div>
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Abrir la carta" aria-expanded="false" aria-controls="letter">
+        <div class="rotator">
+          <div class="address face">
+            <div class="stamp" aria-hidden="true"><span>♥</span></div>
+            <div class="address-label">
+              <p><span>Para:</span> <strong id="recipient">Mi Niña Hermosa</strong></p>
+              <p><span>De:</span> <strong id="sender">Tu Amor</strong></p>
+            </div>
+          </div>
+          <div class="reverse face">
+            <div class="envelope-inside" aria-hidden="true"></div>
+            <div class="flap flap-open" aria-hidden="true"></div>
+            <article class="letter" id="letter" aria-hidden="true">
+              <svg class="heart" viewBox="0 0 80 70" aria-hidden="true"><defs><filter id="paper-grain"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feBlend in="SourceGraphic" mode="soft-light"/></filter><clipPath id="heart-clip"><path d="M40 65C31 57 4 39 4 20C4 0 30-4 40 14C50-4 76 0 76 20C76 39 49 57 40 65Z"/></clipPath></defs><g clip-path="url(#heart-clip)"><path fill="#e77b91" d="M0 0h80v70H0z"/><path fill="#df6c86" filter="url(#paper-grain)" d="M0 0h80v70H0z"/></g></svg>
+              <p class="intro" id="intro">Porque sé que te encantan y te<br>mereces todo el mundo...</p>
+              <h1 id="message">¡Flores Amarillas para el<br>Amor de mi vida! <span class="tiny-flower">🌻</span></h1>
+              <img class="bouquet" src="./assets/ramo.svg" alt="Un ramo de girasoles amarillos">
+            </article>
+            <div class="fold fold-left" aria-hidden="true"></div>
+            <div class="fold fold-right" aria-hidden="true"></div>
+            <div class="fold fold-bottom" aria-hidden="true"></div>
+            <div class="flap flap-closed" aria-hidden="true"></div>
+            <img class="seal" src="./assets/girasol.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="controls">
+      <p id="hint" aria-live="polite">Toca el sobre para abrirlo</p>
+      <div class="control-buttons">
+        <button id="autoplay" type="button" aria-pressed="true"><span id="play-icon" aria-hidden="true">Ⅱ</span> <span id="play-label">Pausar</span></button>
+        <span class="separator" aria-hidden="true">·</span>
+        <button id="replay" type="button"><span aria-hidden="true">↻</span> Repetir</button>
+      </div>
+    </footer>
+    <noscript><p class="no-script">Activa JavaScript para abrir el sobre y ver la animación.</p></noscript>
+  </main>
+</body>
+</html>
